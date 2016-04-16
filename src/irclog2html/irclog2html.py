@@ -612,11 +612,11 @@ class XHTMLStyle(AbstractStyle):
         text = escape(text)
         text = createlinks(text)
         if time:
-            displaytime = shorttime(time)
+            #displaytime = shorttime(time)
             print('<p id="t%s" class="%s">'
                   '<a href="#t%s" class="time">%s</a> '
                   '%s</p>'
-                  % (time, self.CLASSMAP[what], time, displaytime, text),
+                  % (time, self.CLASSMAP[what], time, time, text),
                   file=self.outfile)
         else:
             print('<p class="%s">%s</p>' % (self.CLASSMAP[what], text),
@@ -634,13 +634,13 @@ class XHTMLStyle(AbstractStyle):
         text = createlinks(text)
         text = text.replace('  ', '&nbsp;&nbsp;')
         if time:
-            displaytime = shorttime(time)
+            #displaytime = shorttime(time)
             print('<p id="t%s" class="comment">'
                   '<a href="#t%s" class="time">%s</a> '
                   '<span class="nick" style="color: %s">'
                   '&lt;%s&gt;</span>'
                   ' <span class="text">%s</span></p>'
-                  % (time, time, displaytime, htmlcolour, nick, text),
+                  % (time, time, time, htmlcolour, nick, text),
                   file=self.outfile)
         else:
             print('<p class="comment">'
@@ -663,12 +663,12 @@ class XHTMLTableStyle(XHTMLStyle):
         text = escape(text)
         text = createlinks(text)
         if time:
-            displaytime = shorttime(time)
+            #displaytime = shorttime(time)
             print('<tr id="t%s">'
-                  '<td class="%s" colspan="2">%s</td>'
                   '<td><a href="%s#t%s" class="time">%s</a></td>'
+                  '<td class="%s" colspan="2">%s</td>'
                   '</tr>'
-                  % (time, self.CLASSMAP[what], text, link, time, displaytime),
+                  % (time, link, time, time, self.CLASSMAP[what], text),
                   file=self.outfile)
         else:
             print('<tr>'
@@ -682,22 +682,21 @@ class XHTMLTableStyle(XHTMLStyle):
         text = createlinks(text)
         text = text.replace('  ', '&nbsp;&nbsp;')
         if time:
-            displaytime = shorttime(time)
+            #displaytime = shorttime(time)
             print('<tr id="t%s">'
-                  '<th class="nick" style="background: %s">%s</th>'
-                  '<td class="text" style="color: %s">%s</td>'
                   '<td class="time">'
                   '<a href="%s#t%s" class="time">%s</a></td>'
+                  '<td class="nick" style="background: %s">%s</th>'
+                  '<td class="text" style="color: %s">%s</td>'
                   '</tr>'
-                  % (time, htmlcolour, nick, htmlcolour, text,
-                     link, time, displaytime), file=self.outfile)
+                  % (time, link, time, time, htmlcolour,
+                     nick, htmlcolour, text), file=self.outfile)
         else:
             print('<tr>'
                   '<th class="nick" style="background: %s">%s</th>'
                   '<td class="text" colspan="2" style="color: %s">%s</td>'
                   '</tr>'
                   % (htmlcolour, nick, htmlcolour, text), file=self.outfile)
-
 
 class MediaWikiStyle(AbstractStyle):
     """Table style, produces MediaWiki syntax"""
